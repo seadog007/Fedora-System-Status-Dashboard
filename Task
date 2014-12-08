@@ -1,0 +1,48 @@
+Done:
+
+DISK
+df -h | grep '^/dev' | awk 'BEGIN {printf("[")}; {printf("[\"%s\",\"%s\"],", $1, $2)}; END {printf("]")}' | sed 's/,]$/]/'
+
+
+TIME
+echo "\"`date +"%Y/%m/%d %H:%M:%S %z"`\""
+
+
+USER不重複user
+who | awk '{print $1}'| sort -u | awk 'BEGIN {printf("[")}; {printf("\"%s\",",$1)} END {printf("]")};' | sed "s/,]$/]/"
+
+
+USER重複user
+who | awk '{print $1}'| sort -u | awk 'BEGIN {printf("[")}; {printf("\"%s\",",$1)} END {printf("]")};' | sed "s/,]$/]/"
+
+
+UPTIME有算重複user
+echo "[\"`uptime | sed "s/,/\",\"/g" | sed "s/load average://" | sed "s/users//" | sed "s/\ //g" | sed "s/,/\\",\\"/g" `\"]"
+
+
+NETWORK每個網路界面的流量
+sar -n DEV 1 1 | tail -n `ip -o addr | awk '{print $2}' | sed "s/://g" | sort -u | wc -l` | awk 'BEGIN {printf("[")}; {$1=""; printf("[\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\"],",$2,$3,$4,$5,$6,$7,$8)} END {printf("]")};' | sed "s/],]$/]]/"
+
+
+CPU狀態
+sar 1 1 | tail -n 1 | awk 'BEGIN {printf("[")}; {$1=""; $2=""; printf("%s",$0)} END {printf("]")}' | sed "s/\ /\",\"/g" | sed "s/\",\"\",//" | sed "s/\]/\"\]/"
+
+
+Top 10 CPU使用
+ps -eo pid,%cpu,fuser,comm --sort -%cpu | head -n 11 | tail -n 10 | awk 'BEGIN {printf("[")}; {printf("[\"%s\", \"%s\", \"%s\",\"%s\"],",$1,$2,$3,$4)} END {printf("]")}' | sed "s/],]$/]]/"
+
+
+Top 10 MEM使用
+ps -eo pid,%mem,fuser,comm --sort -%mem | head -n 11 | tail -n 10 | awk 'BEGIN {printf("[")}; {printf("[\"%s\", \"%s\", \"%s\",\"%s\"],",$1,$2,$3,$4)} END {printf("]")}' | sed "s/],]$/]]/"
+
+
+可用更新
+yum check-update | grep 'updates' | awk 'BEGIN {printf("[")}; {printf("[\"%s\",\"%s\",\"%s\"]",$1,$2,$3)}; END {printf("]")}' | sed "s/\]\[/\],\[/g"
+
+
+
+以上都是輸出標準JSON陣列或字串
+Not yet:
+Latest error/warning messages
+Vital system files changed? (e.g. password file)
+Other information of your choice...
