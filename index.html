@@ -1,360 +1,354 @@
 <!DOCTYPE html>
 <!-- saved from url=(0044)http://getbootstrap.com/examples/dashboard/# -->
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <meta http-equiv="refresh" content="20000000">
-    <link rel="icon" href="http://a.ba4b.net/favicon.ico">
 
-    <title>Fedora System Status Dashboard</title>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="description" content="">
+   <meta name="author" content="">
+   <meta http-equiv="refresh" content="20000000">
+   <link rel="icon" href="http://a.ba4b.net/favicon.ico">
 
-    <!-- Bootstrap core CSS -->
-    <link href="Fedora_System_Status_Dashboard_files/bootstrap.min.css" rel="stylesheet">
+   <title>Fedora System Status Dashboard</title>
 
-    <!-- Custom styles for this template -->
-    <link href="Fedora_System_Status_Dashboard_files/dashboard.css" rel="stylesheet">
+   <!-- Bootstrap core CSS -->
+   <link href="Fedora_System_Status_Dashboard_files/bootstrap.min.css" rel="stylesheet">
+
+   <!-- Custom styles for this template -->
+   <link href="Fedora_System_Status_Dashboard_files/dashboard.css" rel="stylesheet">
 
 
-  </head>
+</head>
 
-  <body>
+<body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="index.html">Fedora System Status Dashboard</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="index.html">Dashboard</a></li>
-            <li><a href="">Help</a></li>
-          </ul>
-        </div>
+         <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Fedora System Status Dashboard</a>
+         </div>
+         <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+               <li class="active"><a href="index.html">Dashboard</a>
+               </li>
+               <li><a href="">Help</a>
+               </li>
+            </ul>
+         </div>
       </div>
-    </nav>
+   </nav>
 
-    <div class="container-fluid">
+   <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="index.html">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="">Process Information</a></li>
-            <li><a href="data.json">Raw Data</a></li>
-          </ul>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <div class="page-header">
-            <h1>Overview</h1>
-            <p id="Time">Data Time: </p>
-          </div>
-          <div class="row placeholders">
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 placeholder">
-              <canvas id="ov1" width="200" height="200"></canvas>
-              <h4>CPU</h4>
-              <span class="text-muted" id="ov1per">Something else</span>
+         <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+               <li class="active"><a href="index.html">Overview <span class="sr-only">(current)</span></a>
+               </li>
+               <li><a href="">Process Information</a>
+               </li>
+               <li><a href="data.json">Raw Data</a>
+               </li>
+            </ul>
+         </div>
+         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="page-header">
+               <h1>Overview</h1>
+               <p id="Time">Data Time: </p>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 placeholder">
-              <canvas id="ov2" width="200" height="200"></canvas>
-              <h4>Memory</h4>
-              <span class="text-muted" id="ov2per">Something else</span>
+            <div class="row placeholders">
+               <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 placeholder">
+                  <canvas id="ov1" width="200" height="200"></canvas>
+                  <h4>CPU</h4>
+                  <span class="text-muted" id="ov1per">Something else</span>
+               </div>
+               <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 placeholder">
+                  <canvas id="ov2" width="200" height="200"></canvas>
+                  <h4>Memory</h4>
+                  <span class="text-muted" id="ov2per">Something else</span>
+               </div>
+               <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 placeholder">
+                  <canvas id="ov3" width="200" height="200"></canvas>
+                  <h4>Disk</h4>
+                  <span class="text-muted" id="ov3per">Something else</span>
+               </div>
+               <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 placeholder">
+                  <canvas id="ov4" width="200" height="200"></canvas>
+                  <h4>Label</h4>
+                  <span class="text-muted" id="ov4per">Something else</span>
+               </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 placeholder">
-              <canvas id="ov3" width="200" height="200"></canvas>
-              <h4>Disk</h4>
-              <span class="text-muted" id="ov3per">Something else</span>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 placeholder">
-              <canvas id="ov4" width="200" height="200"></canvas>
-              <h4>Label</h4>
-              <span class="text-muted" id="ov4per">Something else</span>
-            </div>
-          </div>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <h1>System Informtion</h1>
-          
-            <p id="Time2">Data Time: </p>
-            <p id="Uptime">Uptime: </p>
-            <p id="OnlineUser">Online Users: </p>
-            <p id="LoadAvg">Load average: </p>
-            <p>N/A: </p>
-          </div>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <h1>Network</h1>
-          
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 col-xs-offset-0 col-sm-offset-6 col-md-offset-9 col-lg-offset-9">
-              <select class="form-control">
-                <option selected>Packets</option>
-                <option>Bytes</option>
-            </select>
-          </div>
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <canvas id="net"></canvas>
-          </div>
-        </div>
-          
-          
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <h1>CPUs</h1>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <td>%user</td>
-                  <td>%nice</td>
-                  <td>%system</td>
-                  <td>%iowait</td>
-                  <td>%steal</td>
-                  <td>%idle></td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                    <td>1,014</td>
-                    <td>per</td>
-                    <td>id</td>
-                    <td>id</td>
-                    <td>id</td>
-                    <td>id</td>
-                  </tr>
-                </tbody>
-            <table>
-          </div>
-        </div>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <h1>Disks</h1>
-          
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <td>Device</td>
-                  <td>Size</td>
-                  <td>Used</td>
-                  <td>Avail</td>
-                  <td>Use%</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                    <td>test</td>
-                    <td>1,014</td>
-                    <td>per</td>
-                    <td>inceptos</td>
-                    <td>1</td>
-                  </tr>
-                </tbody>
-            <table>
-          </div>
-        </div>
-          
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <h1>Process Information</h1>
-          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-            <h4>CPU Top 10 Process</h4>
-            <div class="table-responsive">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>#PID</th>
-                    <th>CPU%</th>
-                    <th>User</th>
-                    <th>Command</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1,013</td>
-                    <td>torquent</td>
-                    <td>per</td>
-                    <td>conubia</td>
-                  </tr>
-                  <tr>
-                    <td>1,014</td>
-                    <td>per</td>
-                    <td>inceptos</td>
-                    <td>himenaeos</td>
-                  </tr>
-                  <tr>
-                    <td>1,015</td>
-                    <td>sodales</td>
-                    <td>ligula</td>
-                    <td>in</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-            <h4>Memory Top 10 Process</h4>
-            <div class="table-responsive">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>#PID</th>
-                    <th>Memory%</th>
-                    <th>User</th>
-                    <th>Command</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1,013</td>
-                    <td>torquent</td>
-                    <td>per</td>
-                    <td>conubia</td>
-                  </tr>
-                  <tr>
-                    <td>1,014</td>
-                    <td>per</td>
-                    <td>inceptos</td>
-                    <td>himenaeos</td>
-                  </tr>
-                  <tr>
-                    <td>1,015</td>
-                    <td>sodales</td>
-                    <td>ligula</td>
-                    <td>in</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+               <h1 class="sub-header">System Informtion</h1>
 
-          
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <h1>Available Update List</h1>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <td>Package Name</td>
-                  <td>Version</td>
-                  <td>Type</td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                    <td>1,014</td>
-                    <td>per</td>
-                    <td>inceptos</td>
-                  </tr>
-                </tbody>
-            <table>
-          </div>
-</div>
-        </div>
+               <p id="Time2">Data Time: </p>
+               <p id="Uptime">Uptime: </p>
+               <p id="OnlineUser">Online Users: </p>
+               <p id="LoadAvg">Load average: </p>
+               <p>N/A: </p>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+               <h1 class="sub-header">Network</h1>
+
+               <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 col-xs-offset-0 col-sm-offset-6 col-md-offset-9 col-lg-offset-9">
+                  <select class="form-control">
+                     <option selected>Packets</option>
+                     <option>Bytes</option>
+                  </select>
+               </div>
+               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <canvas id="net"></canvas>
+               </div>
+            </div>
+
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+               <h1 class="sub-header">CPUs</h1>
+               <div class="table-responsive">
+                  <table class="table table-striped">
+                     <thead>
+                        <tr>
+                           <td>%user</td>
+                           <td>%nice</td>
+                           <td>%system</td>
+                           <td>%iowait</td>
+                           <td>%steal</td>
+                           <td>%idle></td>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td>1,014</td>
+                           <td>per</td>
+                           <td>id</td>
+                           <td>id</td>
+                           <td>id</td>
+                           <td>id</td>
+                        </tr>
+                     </tbody>
+                     <table>
+               </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+               <h1>Disks</h1>
+
+               <div class="table-responsive">
+                  <table class="table table-striped">
+                     <thead>
+                        <tr>
+                           <td>Device</td>
+                           <td>Size</td>
+                           <td>Used</td>
+                           <td>Avail</td>
+                           <td>Use%</td>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td>test</td>
+                           <td>1,014</td>
+                           <td>per</td>
+                           <td>inceptos</td>
+                           <td>1</td>
+                        </tr>
+                     </tbody>
+                     </table>
+               </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+               <h1>Process Information</h1>
+               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                  <h4>CPU Top 10 Process</h4>
+                  <div class="table-responsive">
+                     <table class="table table-striped">
+                        <thead>
+                           <tr>
+                              <th>#PID</th>
+                              <th>CPU%</th>
+                              <th>User</th>
+                              <th>Command</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <td>1,013</td>
+                              <td>torquent</td>
+                              <td>per</td>
+                              <td>conubia</td>
+                           </tr>
+                           <tr>
+                              <td>1,014</td>
+                              <td>per</td>
+                              <td>inceptos</td>
+                              <td>himenaeos</td>
+                           </tr>
+                           <tr>
+                              <td>1,015</td>
+                              <td>sodales</td>
+                              <td>ligula</td>
+                              <td>in</td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                  <h4>Memory Top 10 Process</h4>
+                  <div class="table-responsive">
+                     <table class="table table-striped">
+                        <thead>
+                           <tr>
+                              <th>#PID</th>
+                              <th>Memory%</th>
+                              <th>User</th>
+                              <th>Command</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                           <tr>
+                              <td>1,013</td>
+                              <td>torquent</td>
+                              <td>per</td>
+                              <td>conubia</td>
+                           </tr>
+                           <tr>
+                              <td>1,014</td>
+                              <td>per</td>
+                              <td>inceptos</td>
+                              <td>himenaeos</td>
+                           </tr>
+                           <tr>
+                              <td>1,015</td>
+                              <td>sodales</td>
+                              <td>ligula</td>
+                              <td>in</td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+
+
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+               <h1 class="sub-header">Available Update List</h1>
+               <div class="table-responsive">
+                  <table class="table table-striped">
+                     <thead>
+                        <tr>
+                           <td>Package Name</td>
+                           <td>Version</td>
+                           <td>Type</td>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td>1,014</td>
+                           <td>per</td>
+                           <td>inceptos</td>
+                        </tr>
+                     </tbody>
+                     </table>
+
+               </div>
+            </div>
+         </div>
       </div>
-    </div>
+   </div>
 
-    <!-- Bootstrap core JavaScript
+   <!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="Fedora_System_Status_Dashboard_files/jquery.min.js"></script>
-    <script src="Fedora_System_Status_Dashboard_files/bootstrap.min.js"></script>
-    <script src="Fedora_System_Status_Dashboard_files/docs.min.js"></script>
-    <script src="Fedora_System_Status_Dashboard_files/Chart.min.js"></script>
-    <script src="Fedora_System_Status_Dashboard_files/options.js"></script>
-    <script>
-      var ov1data = [
-        {
-          value: 54.1,
-          color: "#E0E0E0",
-          highlight: "#F0F0F0",
-          label: "Not Use"
-        },
-        {
-          value: 45.9,
-          color:"#0D8FDB",
-          highlight: "#1FA1ED",
-          label: "Used"
-        }
-      ]
-      var ov2data = [
-        {
-          value: 49.2,
-          color: "#E0E0E0",
-          highlight: "#F0F0F0",
-          label: "Not Use"
-        },
-        {
-          value: 50.8,
-          color:"#0D8FDB",
-          highlight: "#1FA1ED",
-          label: "Used"
-        }
-      ]
-      var ov3data = [
-        {
-          value: 13.7,
-          color: "#E0E0E0",
-          highlight: "#F0F0F0",
-          label: "Not Use"
-        },
-        {
-          value: 86.3,
-          color:"#0D8FDB",
-          highlight: "#1FA1ED",
-          label: "Used"
-        }
-      ]
-      var ov4data = [
-        {
-          value: 93.1,
-          color: "#E0E0E0",
-          highlight: "#F0F0F0",
-          label: "Not Use"
-        },
-        {
-          value: 7.9,
-          color:"#0D8FDB",
-          highlight: "#1FA1ED",
-          label: "Used"
-        }
-      ]
-      var netdata = {
-        labels: ["lo", "em1", "veth59b1","docker"],
-        datasets: [
-          {
-            label: "My First dataset",
-            fillColor: "rgba(220,220,220,0.5)",
-            strokeColor: "rgba(220,220,220,0.8)",
-            highlightFill: "rgba(220,220,220,0.75)",
-            highlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81]
-          },
-          {
-            label: "My Second dataset",
-            fillColor: "rgba(151,187,205,0.5)",
-            strokeColor: "rgba(151,187,205,0.8)",
-            highlightFill: "rgba(151,187,205,0.75)",
-            highlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19]
-          }
-        ]
-      };
+   <!-- Placed at the end of the document so the pages load faster -->
+   <script src="Fedora_System_Status_Dashboard_files/jquery.min.js"></script>
+   <script src="Fedora_System_Status_Dashboard_files/bootstrap.min.js"></script>
+   <script src="Fedora_System_Status_Dashboard_files/docs.min.js"></script>
+   <script src="Fedora_System_Status_Dashboard_files/Chart.min.js"></script>
+   <script src="Fedora_System_Status_Dashboard_files/options.js"></script>
+   <script>
+   var ov1data = [{
+      value: 54.1,
+      color: "#E0E0E0",
+      highlight: "#F0F0F0",
+      label: "Not Use"
+   }, {
+      value: 45.9,
+      color: "#0D8FDB",
+      highlight: "#1FA1ED",
+      label: "Used"
+   }]
+   var ov2data = [{
+      value: 49.2,
+      color: "#E0E0E0",
+      highlight: "#F0F0F0",
+      label: "Not Use"
+   }, {
+      value: 50.8,
+      color: "#0D8FDB",
+      highlight: "#1FA1ED",
+      label: "Used"
+   }]
+   var ov3data = [{
+      value: 13.7,
+      color: "#E0E0E0",
+      highlight: "#F0F0F0",
+      label: "Not Use"
+   }, {
+      value: 86.3,
+      color: "#0D8FDB",
+      highlight: "#1FA1ED",
+      label: "Used"
+   }]
+   var ov4data = [{
+      value: 93.1,
+      color: "#E0E0E0",
+      highlight: "#F0F0F0",
+      label: "Not Use"
+   }, {
+      value: 7.9,
+      color: "#0D8FDB",
+      highlight: "#1FA1ED",
+      label: "Used"
+   }]
+   var netdata = {
+      labels: ["lo", "em1", "veth59b1", "docker"],
+      datasets: [{
+         label: "My First dataset",
+         fillColor: "rgba(220,220,220,0.5)",
+         strokeColor: "rgba(220,220,220,0.8)",
+         highlightFill: "rgba(220,220,220,0.75)",
+         highlightStroke: "rgba(220,220,220,1)",
+         data: [65, 59, 80, 81]
+      }, {
+         label: "My Second dataset",
+         fillColor: "rgba(151,187,205,0.5)",
+         strokeColor: "rgba(151,187,205,0.8)",
+         highlightFill: "rgba(151,187,205,0.75)",
+         highlightStroke: "rgba(151,187,205,1)",
+         data: [28, 48, 40, 19]
+      }]
+   };
 
-      var ov1ctx = $("#ov1").get(0).getContext("2d");
-      var ov1c = new Chart(ov1ctx).Doughnut(ov1data,ovoptions);
-      var ov2ctx = $("#ov2").get(0).getContext("2d");
-      var ov2c = new Chart(ov2ctx).Doughnut(ov2data,ovoptions);
-      var ov3ctx = $("#ov3").get(0).getContext("2d");
-      var ov3c = new Chart(ov3ctx).Doughnut(ov3data,ovoptions);
-      var ov4ctx = $("#ov4").get(0).getContext("2d");
-      var ov4c = new Chart(ov4ctx).Doughnut(ov4data,ovoptions);
-      var netctx = $("#net").get(0).getContext("2d");
-      var netc = new Chart(netctx).Bar(netdata, netoptions);
-    </script>
-  </body>
+   var ov1ctx = $("#ov1").get(0).getContext("2d");
+   var ov1c = new Chart(ov1ctx).Doughnut(ov1data, ovoptions);
+   var ov2ctx = $("#ov2").get(0).getContext("2d");
+   var ov2c = new Chart(ov2ctx).Doughnut(ov2data, ovoptions);
+   var ov3ctx = $("#ov3").get(0).getContext("2d");
+   var ov3c = new Chart(ov3ctx).Doughnut(ov3data, ovoptions);
+   var ov4ctx = $("#ov4").get(0).getContext("2d");
+   var ov4c = new Chart(ov4ctx).Doughnut(ov4data, ovoptions);
+   var netctx = $("#net").get(0).getContext("2d");
+   var netc = new Chart(netctx).Bar(netdata, netoptions);
+
+   </script>
+</body>
+
 </html>
