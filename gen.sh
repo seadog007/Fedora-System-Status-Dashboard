@@ -43,6 +43,15 @@ while true
 	# Top 10 Memory process
 	out=$out"\"Process_10T_Mem\":"`ps -eo pid,%mem,fuser,comm --sort -%mem | head -n 11 | tail -n 10 | awk 'BEGIN {printf("[")}; {printf("[\"%s\", \"%s\", \"%s\",\"%s\"],",$1,$2,$3,$4)} END {printf("]")}' | sed "s/],]$/]]/"`
 	out=$out","
+
+  # Last Error
+  out=$out"\"Lasterror\":"`dmesg | grep -E 'Error|error' | tail -n 1`
+  out=$out","
+
+  # Last Warning
+  out=$out"\"Lasterror\":"`dmesg | grep -E 'Warning|warning' | tail -n 1`
+  out=$out","
+
 	# Yum update
 	if [ $timer -eq $max ]
 	then
@@ -52,7 +61,7 @@ while true
 	else
 		((timer++))
 	fi
-	out=$out"\"Update\":"$yum	
+	out=$out"\"Update\":"$yum
 
 	# End
 	out=$out"}	"
