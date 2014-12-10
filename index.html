@@ -191,6 +191,7 @@
     <script src="Fedora_System_Status_Dashboard_files/bootstrap.min.js"></script>
     <script src="Fedora_System_Status_Dashboard_files/docs.min.js"></script>
     <script src="Fedora_System_Status_Dashboard_files/Chart.min.js"></script>
+    <script src="Fedora_System_Status_Dashboard_files/options.js"></script>
     <script>
       var ov1data = [
         {
@@ -269,14 +270,6 @@
           }
         ]
       };
-      var ovoptions = {
-        animateScale: true,
-        tooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %>%"
-      }
-      var netoptions = {
-        //Chart.defaults.global.responsive = true,
-        responsive: true
-      }
 
       var ov1ctx = $("#ov1").get(0).getContext("2d");
       var ov1c = new Chart(ov1ctx).Doughnut(ov1data,ovoptions);
