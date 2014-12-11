@@ -13,10 +13,14 @@ while true
 	out="{"
 
 	# Disk
+    # $('#ov3')
+    # $('#Disktable')
 	out=$out"\"Disk\":"`df -h | grep '^/dev' | awk 'BEGIN {printf("[")}; {printf("[\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"],", $1, $2, $3, $4, $5)}; END {printf("]")}' | sed 's/,]$/]/'`
 	out=$out","
 
 	# TIME
+    # $('#Time')
+    # $('#Time2')
 	out=$out"\"Time\":"`echo "\"\`date +"%Y/%m/%d %H:%M:%S %z"\`\""`
 	out=$out","
 
@@ -25,34 +29,44 @@ while true
 	out=$out","
 
 	# Uptime
+    # $('#Uptime')
 	out=$out"\"Uptime\":"`echo "[\"\`uptime | sed "s/,/\",\"/g" | sed "s/load average://" | sed "s/users//" | sed "s/\ //g" | sed "s/,/\\",\\"/g" \`\"]"`
 	out=$out","
 
 	# Network
+    # $('#net')
 	out=$out"\"Network\":"`sar -n DEV 1 1 | tail -n \`ip -o addr | awk '{print $2}' | sed "s/://g" | sort -u | wc -l\` | awk 'BEGIN {printf("[")}; {$1=""; printf("[\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\"],",$2,$3,$4,$5,$6,$7,$8)} END {printf("]")};' | sed "s/],]$/]]/"`
 	out=$out","
 
 	# CPU
+    # $('#CPUtable')
 	out=$out"\"CPUs\":"`sar 1 1 | tail -n 1 | awk 'BEGIN {printf("[")}; {$1=""; $2=""; printf("%s",$0)} END {printf("]")}' | sed "s/\ /\",\"/g" | sed "s/\",\"\",//" | sed "s/\]/\"\]/"`
 	out=$out","
 
 	# Top 10 CPU process
+    # $('#Process_10T_Mem_Table')
 	out=$out"\"Process_10T_CPU\":"`ps -eo pid,%cpu,fuser,comm --sort -%cpu | head -n 11 | tail -n 10 | awk 'BEGIN {printf("[")}; {printf("[\"%s\", \"%s\", \"%s\",\"%s\"],",$1,$2,$3,$4)} END {printf("]")}' | sed "s/],]$/]]/"`
 	out=$out","
 
 	# Top 10 Memory process
+    # $('#Process_10T_CPU_Table')
 	out=$out"\"Process_10T_Mem\":"`ps -eo pid,%mem,fuser,comm --sort -%mem | head -n 11 | tail -n 10 | awk 'BEGIN {printf("[")}; {printf("[\"%s\", \"%s\", \"%s\",\"%s\"],",$1,$2,$3,$4)} END {printf("]")}' | sed "s/],]$/]]/"`
 	out=$out","
 
   # Last Error
+    # $('#LErr')
+    # $('#Last_10_Error_Table')
   out=$out"\"Lasterror\":"`dmesg | grep -E 'Error|error' | tail -n 1`
   out=$out","
 
   # Last Warning
+    # $('#LWar')
+    # $('#Last_10_War_Table')
   out=$out"\"Lasterror\":"`dmesg | grep -E 'Warning|warning' | tail -n 1`
   out=$out","
 
 	# Yum update
+    # $('#Updatetable')
 	if [ $timer -eq $max ]
 	then
 		echo "Getting Update List, Please wait."
