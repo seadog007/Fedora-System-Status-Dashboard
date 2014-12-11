@@ -25,12 +25,13 @@ while true
 	out=$out","
 
 	# 不重複User
+    # $('#OnlineUser')
 	out=$out"\"Users\":"`who | awk '{print $1}'| sort -u | awk 'BEGIN {printf("[")}; {printf("\"%s\",",$1)} END {printf("]")};' | sed "s/,]$/]/"`
 	out=$out","
 
 	# Uptime
     # $('#Uptime')
-	out=$out"\"Uptime\":"`echo "[\"\`uptime | sed "s/,/\",\"/g" | sed "s/load average://" | sed "s/users//" | sed "s/\ //g" | sed "s/,/\\",\\"/g" \`\"]"`
+	out=$out"\"Uptime\":"`echo "[\"\`uptime | sed "s/load\ average://" | sed "s/users//" | sed "s/\ //g" | sed "s/,/\\\",\\\"/g"\`\"]"`
 	out=$out","
 
 	# Network
@@ -56,13 +57,13 @@ while true
   # Last Error
     # $('#LErr')
     # $('#Last_10_Error_Table')
-    out=$out"\"Lasterror\":"`dmesg | grep -E 'Error|error' | tail -n 10 | sed 's/\\/\\\\/g' | awk 'NR > 1 {printf(", ")} BEGIN {printf("[")}; {printf("\"%s\"",$0)} END {printf("]")};'`
+    out=$out"\"Lasterror\":"`dmesg | grep -E 'Error|error' | tail -n 10 | sed 's/\\\\/\\\\\\\\/g' | awk 'NR > 1 {printf(", ")} BEGIN {printf("[")}; {printf("\"%s\"",$0)} END {printf("]")};'`
   out=$out","
 
   # Last Warning
     # $('#LWar')
     # $('#Last_10_War_Table')
-    out=$out"\"Lastwar\":"`dmesg | grep -E 'Warning|warning' | tail -n 10 | sed 's/\\/\\\\/g' | awk 'NR > 1 {printf(", ")} BEGIN {printf("[")}; {printf("\"%s\"",$0)} END {printf("]")};'`
+    out=$out"\"Lastwar\":"`dmesg | grep -E 'Warning|warning' | tail -n 10 | sed 's/\\\\/\\\\\\\\/g' | awk 'NR > 1 {printf(", ")} BEGIN {printf("[")}; {printf("\"%s\"",$0)} END {printf("]")};'`
   out=$out","
 
 	# Yum update
@@ -78,7 +79,7 @@ while true
 	out=$out"\"Update\":"$yum
 
 	# End
-	out=$out"}	"
+	out=$out"}"
 
 	# Echo all data to file
 	echo "Writing the data into the json file"
