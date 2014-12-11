@@ -62,7 +62,7 @@ while true
   # Last Warning
     # $('#LWar')
     # $('#Last_10_War_Table')
-  out=$out"\"Lasterror\":"`dmesg | grep -E 'Warning|warning' | tail -n 1`
+  out=$out"\"Lastwar\":"`dmesg | grep -E 'Warning|warning' | tail -n 1`
   out=$out","
 
 	# Yum update
