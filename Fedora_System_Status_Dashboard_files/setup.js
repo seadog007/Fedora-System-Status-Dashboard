@@ -47,6 +47,9 @@ $.getJSON("data.json", function (json) {
         L10Err = L10Err + "<td>" + json.LastError[i] + "</td>"
         L10Err = L10Err + "</tr>"
     }
+    if (json.LastError.length == 0){
+        L10Err = "<tr><td colspan=2>Congratulation! There is not any Error.</td></tr>"
+    }
 
     var L10War = ""
     for (var i = 0; i <= json.LastWar.length - 1; i++) {
@@ -55,15 +58,22 @@ $.getJSON("data.json", function (json) {
         L10War = L10War + "<td>" + json.LastWar[i] + "</td>"
         L10War = L10War + "</tr>"
     }
+    if (json.LastWar.length == 0){
+        L10War = "<tr><td colspan=2>Congratulation! There is not any Warning.</td></tr>"
+    }
 
     var Update = ""
-     for (var i = 0; i <= json.Update.length - 1; i++) {
+    for (var i = 0; i <= json.Update.length - 1; i++) {
         Update = Update + "<tr>"
         for (var j = 0; j <= 3 - 1; j++) {
             Update = Update + "<td>" + json.Update[i][j] + "</td>"
         }
         Update = Update + "</tr>"
-      }
+    }
+    if (json.Update.length == 0){
+        Update = "<tr><td colspan=3>Great! You don't have update.</td></tr>"
+    }
+
     $('#Time').text("Data Time: " + Time);
     $('#Time2').text("Data Time: " + Time);
     $('#Uptime').text("Uptime: " + Uptime.replace("up","   "))
