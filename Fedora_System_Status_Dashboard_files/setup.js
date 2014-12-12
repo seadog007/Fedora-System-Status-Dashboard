@@ -56,6 +56,14 @@ $.getJSON("data.json", function (json) {
         L10War = L10War + "</tr>"
     }
 
+    var Update = ""
+     for (var i = 0; i <= json.Update.length - 1; i++) {
+        Update = Update + "<tr>"
+        for (var j = 0; j <= 3 - 1; j++) {
+            Update = Update + "<td>" + json.Update[i][j] + "</td>"
+        }
+        Update = Update + "</tr>"
+      }
     $('#Time').text("Data Time: " + Time);
     $('#Time2').text("Data Time: " + Time);
     $('#Uptime').text("Uptime: " + Uptime.replace("up","   "))
@@ -68,4 +76,5 @@ $.getJSON("data.json", function (json) {
     $('#Last_10_Warning_Table').append(L10War)
     $('#LErr').text("Last Error: " + LastErr)
     $('#LWar').text("Last Warning: " + LastWar)
+    $('#Updatetable').append(Update)
 });
