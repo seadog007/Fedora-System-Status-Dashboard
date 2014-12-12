@@ -14,14 +14,37 @@ $.getJSON("data.json", function (json) {
     var LastErr = json.LastError[json.LastError.length - 1]
     var LastWar = json.LastWar[json.LastWar.length - 1]
 
+    var DiskUseAvg = 0
     var Disk = ""
-    for (var i = 0; i <= json.Disk.length -1; i++) {
+    for (var i = 0; i <= json.Disk.length - 1; i++) {
         Disk = Disk + "<tr>"
         for (var j =0; j <= 5 - 1; j++){
-            Disk = Disk + "<td>" + json.Disk[i][j] + "</td>"
+            if (j >= 2 - 1 & j <= 4 - 1){
+                Disk = Disk + "<td>" + (Math.round(json.Disk[i][j]/1000/10)/100) + " GB" + "</td>"
+            }else{
+                Disk = Disk + "<td>" + json.Disk[i][j] + "</td>"
+            }
         }
+        DiskUseAvg = (DiskUseAvg + Number(json.Disk[i][4].replace("%","")))
         Disk = Disk + "</tr>"
     }
+    DiskUseAvg = (DiskUseAvg/json.Disk.length)
+
+    var Memory = ""
+    Memory = Memory + "<tr>"
+    Memory = Memory + "<td>Memory</td>"
+    for (var i = 0; i <= json.Mem.length - 1; i++) {
+        Memory = Memory + "<td>" + (Math.round(json.Mem[i]/1000/10)/100) + " GB" + "</td>"
+    }
+    Memory = Memory + "</tr>"
+
+    var Swap = ""
+    Swap = Swap + "<tr>"
+    Swap = Swap + "<td>Swap</td>"
+    for (var i = 0; i <= json.Swap.length - 1; i++){
+        Swap = Swap + "<td>" + (Math.round(json.Swap[i]/1000/10)/100) + " GB" + "</td>"
+    }
+    Swap = Swap + "</tr>"
 
     var CT10P = ""
     for (var i = 0; i <= json.Process_10T_CPU.length - 1; i++) {
@@ -80,6 +103,8 @@ $.getJSON("data.json", function (json) {
     $('#OnlineUser').text("Online Users: " + Users)
     $('#LoadAvg').text("Load average: " + LoadAvg)
     $('#Disktable').append(Disk)
+    $('#MemXSwap').append(Memory)
+    $('#MemXSwap').append(Swap)
     $('#Process_10T_CPU_Table').append(CT10P)
     $('#Process_10T_Mem_Table').append(MT10P)
     $('#Last_10_Error_Table').append(L10Err)

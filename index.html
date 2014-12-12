@@ -108,20 +108,6 @@
           <p id="LErr">Last Error: </p>
           <p id="LWar">Last Warning: </p>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <h1 class="sub-header">Network</h1>
-
-          <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 col-xs-offset-0 col-sm-offset-6 col-md-offset-9 col-lg-offset-9">
-            <select class="form-control">
-              <option selected>Packets</option>
-              <option>Bytes</option>
-            </select>
-          </div>
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <canvas id="net"></canvas>
-          </div>
-        </div>
-
 
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <h1 class="sub-header">CPU</h1>
@@ -129,6 +115,7 @@
             <table class="table table-striped">
               <thead>
                 <tr>
+                  <td>Serial</td>
                   <td>%user</td>
                   <td>%nice</td>
                   <td>%system</td>
@@ -142,9 +129,9 @@
             </table>
           </div>
         </div>
+
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <h1 class="sub-header">Disk</h1>
-
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -159,6 +146,40 @@
               <tbody id="Disktable">
               </tbody>
             </table>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <h1 class="sub-header">Memory & Swap</h1>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <td>Device</td>
+                  <td>Size</td>
+                  <td>Used</td>
+                  <td>Avail</td>
+                  <td>Shared</td>
+                  <td>Buffer/Cache</td>
+                  <td>Available</td>
+                </tr>
+              </thead>
+              <tbody id="MemXSwap">
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <h1 class="sub-header">Network</h1>
+          <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 col-xs-offset-0 col-sm-offset-6 col-md-offset-9 col-lg-offset-9">
+            <select class="form-control">
+              <option selected>Packets</option>
+              <option>Bytes</option>
+            </select>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <canvas id="net"></canvas>
           </div>
         </div>
 
@@ -201,7 +222,7 @@
         </div>
 
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <h1 class="sub-header">Error / Warning</h1>
+          <h1 class="sub-header">Error & Warning</h1>
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <h4>Last 10 Error</h4>
             <div class="table-responsive">
