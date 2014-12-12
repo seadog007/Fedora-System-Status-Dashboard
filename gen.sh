@@ -12,11 +12,21 @@ while true
 	# Begin
 	out="{"
 
-	# Disk
+  # Memory
+    # $('#ov2')
+  out=$out`echo "\"\`free | head -n 2 | tail -n 1 | sed -r "s/[ ]+/,/g" | sed "s/:,/\\\\":\[/"\`]"`
+	out=$out","
+
+  # Disk
     # $('#ov3')
     # $('#Disktable')
-	out=$out"\"Disk\":"`df -h | grep '^/dev' | awk 'BEGIN {printf("[")}; {printf("[\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"],", $1, $2, $3, $4, $5)}; END {printf("]")}' | sed 's/,]$/]/'`
+	out=$out"\"Disk\":"`df | grep '^/dev/s' | tac | awk 'BEGIN {printf("[")}; {printf("[\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"],", $1, $2, $3, $4, $5)}; END {printf("]")}' | sed 's/,]$/]/'`
 	out=$out","
+
+  # Swap
+    # $('#ov4')
+  out=$out`echo "\"\`free | tail -n 1 | sed -r "s/[ ]+/,/g" | sed "s/:,/\\\\":\[/"\`]"`
+  out=$out","
 
 	# TIME
     # $('#Time')
@@ -40,6 +50,7 @@ while true
 	out=$out","
 
 	# CPU
+    # $('#ov1')
     # $('#CPUtable')
 	out=$out"\"CPUs\":"`sar 1 1 | tail -n 1 | awk 'BEGIN {printf("[")}; {$1=""; $2=""; printf("%s",$0)} END {printf("]")}' | sed "s/\ /\",\"/g" | sed "s/\",\"\",//" | sed "s/\]/\"\]/"`
 	out=$out","
