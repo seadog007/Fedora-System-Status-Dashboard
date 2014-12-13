@@ -33,7 +33,12 @@ How to use it?
   git add /etc/init.d/
   ```
 5. Commit your files list.
-`git commit -am "Your message"`
-6. And you need to run gen.sh with root
-`./gen.sh`
+  ```
+  git commit -am "Your message"
+  ```
+6. And you need to back your path and run gen.sh with root
+  ```
+  cd Your Path
+  ./gen.sh
+  ```
 7. You can view your machine status on the WEB!!
