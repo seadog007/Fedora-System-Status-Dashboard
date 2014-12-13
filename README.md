@@ -12,8 +12,20 @@ git init
 3. And you need to add your "Important" files.
   - These are my files list
   ```
-  /etc/xxx
-
+  git add /etc/passwd
+  git add /etc/group
+  git add /etc/shadow
+  git add /home/seadog007/.ssh/authorized_keys
+  git add /etc/httpd/conf*
+  git add /etc/ssh/ssh*config
+  git add /bin
+  git add /etc/httpd/conf*
+  git add /etc/fstab
+  git add /etc/crontab
+  git add /etc/yum.repos.d/
+  git add /etc/gshadow*
+  git add /etc/host*
+  git add /etc/init.d/
   ```
 4. Commit your files list.
 `git commit -am "Your message"`
