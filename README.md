@@ -1,6 +1,6 @@
 Fedora-System-Status-Dashboard (Google Code In task#3)
 ==============================
-
+![ScreenCapture](https://raw.githubusercontent.com/seadog007/Fedora-System-Status-Dashboard/master/Screen.png)
 How to use it?
 ------------------------------
 1. Install these packages
