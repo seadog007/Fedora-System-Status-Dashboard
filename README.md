@@ -34,4 +34,4 @@ How to use it?
 6. And you need to back your path and run gen.sh with root.  
   `cd Your Path`  
   `./gen.sh`
-7. You can view your machine status on the WEB!!
+7. You can view your machine status on the WEB!! [Demo](http://fssd.gci.ba4b.net/FSSD/)
