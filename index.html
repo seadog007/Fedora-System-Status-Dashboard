@@ -115,12 +115,16 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <td>Serial</td>
-                  <td>%user</td>
+                  <td>CPU</td>
+                  <td>%usr</td>
                   <td>%nice</td>
                   <td>%system</td>
                   <td>%iowait</td>
+                  <td>%irq</td>
+                  <td>%soft</td>
                   <td>%steal</td>
+                  <td>%gues</td>
+                  <td>%gnice</td>
                   <td>%idle</td>
                 </tr>
               </thead>
@@ -157,11 +161,9 @@
                 <tr>
                   <td>Device</td>
                   <td>Size</td>
+                  <td>Free</td>
                   <td>Used</td>
-                  <td>Avail</td>
-                  <td>Shared</td>
-                  <td>Buffer/Cache</td>
-                  <td>Available</td>
+                  <td>Buffer/Cache or Avail</td>
                 </tr>
               </thead>
               <tbody id="MemXSwap">
@@ -285,97 +287,7 @@
   <script src="Fedora_System_Status_Dashboard_files/Chart.min.js"></script>
   <script src="Fedora_System_Status_Dashboard_files/options.js"></script>
   <script src="Fedora_System_Status_Dashboard_files/setup.js"></script>
-  <script>
-  var ov1data = [{
-    value: 54.1,
-    color: "#E0E0E0",
-    highlight: "#F0F0F0",
-    label: "Not Use"
-   }, {
-    value: 45.9,
-    color: "#0D8FDB",
-    highlight: "#1FA1ED",
-    label: "Used"
-   }]
-  var ov2data = [{
-    value: 49.2,
-    color: "#E0E0E0",
-    highlight: "#F0F0F0",
-    label: "Not Use"
-   }, {
-    value: 50.8,
-    color: "#0D8FDB",
-    highlight: "#1FA1ED",
-    label: "Used"
-   }]
-  var ov3data = [{
-    value: 13.7,
-    color: "#E0E0E0",
-    highlight: "#F0F0F0",
-    label: "Not Use"
-   }, {
-    value: 86.3,
-    color: "#0D8FDB",
-    highlight: "#1FA1ED",
-    label: "Used"
-   }]
-  var ov4data = [{
-    value: 93.1,
-    color: "#E0E0E0",
-    highlight: "#F0F0F0",
-    label: "Not Use"
-   }, {
-    value: 7.9,
-    color: "#0D8FDB",
-    highlight: "#1FA1ED",
-    label: "Used"
-   }]
-  var netdata = {
-    labels: ["lo", "em1", "veth59b1", "docker"],
-    datasets: [{
-      label: "My First dataset",
-      fillColor: "rgba(220,220,220,0.5)",
-      strokeColor: "rgba(220,220,220,0.8)",
-      highlightFill: "rgba(220,220,220,0.75)",
-      highlightStroke: "rgba(220,220,220,1)",
-      data: [65, 59, 80, 81]
-      }, {
-      label: "My Second dataset",
-      fillColor: "rgba(151,187,205,0.5)",
-      strokeColor: "rgba(151,187,205,0.8)",
-      highlightFill: "rgba(151,187,205,0.75)",
-      highlightStroke: "rgba(151,187,205,1)",
-      data: [28, 48, 40, 19]
-      }]
-  };
 
-  var ov1ctx = $("#ov1")
-    .get(0)
-    .getContext("2d");
-  var ov1c = new Chart(ov1ctx)
-    .Doughnut(ov1data, ovoptions);
-  var ov2ctx = $("#ov2")
-    .get(0)
-    .getContext("2d");
-  var ov2c = new Chart(ov2ctx)
-    .Doughnut(ov2data, ovoptions);
-  var ov3ctx = $("#ov3")
-    .get(0)
-    .getContext("2d");
-  var ov3c = new Chart(ov3ctx)
-    .Doughnut(ov3data, ovoptions);
-  var ov4ctx = $("#ov4")
-    .get(0)
-    .getContext("2d");
-  var ov4c = new Chart(ov4ctx)
-    .Doughnut(ov4data, ovoptions);
-  var netctx = $("#net")
-    .get(0)
-    .getContext("2d");
-  var netc = new Chart(netctx)
-    .Bar(netdata, netoptions);
-
-  </script>
 </body>
 
 </html>

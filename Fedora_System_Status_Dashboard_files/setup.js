@@ -14,7 +14,20 @@ $.getJSON("data.json", function (json) {
     var LastErr = json.LastError[json.LastError.length - 1]
     var LastWar = json.LastWar[json.LastWar.length - 1]
 
+    var CPU = ""
+    var CPUIdle = json.CPUs[0][10]
+    for (var i = 0; i <= json.CPUs.length - 1; i++) {
+        CPU = CPU + "<tr>"
+        for (var j = 0; j <= 11 - 1; j++){
+                CPU = CPU + "<td>" + json.CPUs[i][j] + "</td>"
+        }
+        CPU = CPU + "</tr>"
+    }
+
     var DiskUseAvg = 0
+    var DiskTotalAvail = 0
+    var DiskTotalUsed = 0
+    var DiskTotalSize = 0
     var Disk = ""
     for (var i = 0; i <= json.Disk.length - 1; i++) {
         Disk = Disk + "<tr>"
@@ -26,11 +39,18 @@ $.getJSON("data.json", function (json) {
             }
         }
         DiskUseAvg = (DiskUseAvg + Number(json.Disk[i][4].replace("%","")))
+        DiskTotalAvail = (DiskTotalAvail + Number(json.Disk[i][3]))
+        DiskTotalUsed = (DiskTotalUsed + Number(json.Disk[i][2]))
+        DiskTotalSize = (DiskTotalSize + Number(json.Disk[i][1]))
         Disk = Disk + "</tr>"
     }
     DiskUseAvg = (DiskUseAvg/json.Disk.length)
 
     var Memory = ""
+    var MemorySize = json.Mem[0]
+    var MemoryAvail = json.Mem[1]
+    var MemoryUsed = json.Mem[2]
+    var MemoryBuffer = json.Mem[3]
     Memory = Memory + "<tr>"
     Memory = Memory + "<td>Memory</td>"
     for (var i = 0; i <= json.Mem.length - 1; i++) {
@@ -39,6 +59,10 @@ $.getJSON("data.json", function (json) {
     Memory = Memory + "</tr>"
 
     var Swap = ""
+    var SwapSize = json.Swap[0]
+    var SwapFree = json.Swap[1]
+    var SwapUsed = json.Swap[2]
+    var SwapAvail = json.Swap[3]
     Swap = Swap + "<tr>"
     Swap = Swap + "<td>Swap</td>"
     for (var i = 0; i <= json.Swap.length - 1; i++){
@@ -97,11 +121,19 @@ $.getJSON("data.json", function (json) {
         Update = "<tr><td colspan=3>Great! You don't have update.</td></tr>"
     }
 
+    $('#ov1per').text("Used: " + (Math.round((100 - CPUIdle)*100)/100) + "%")
+    $('#ov2per').text("Used: " + (Math.round((MemoryUsed/MemorySize)*10000)/100) + "%" + "\n" + ((Math.round(MemoryUsed/1000/10)/100) + " GB") + "/" + ((Math.round(MemorySize/1000/10)/100) + " GB") + "\n" + "(Buffer/Cache: " + ((Math.round(MemoryBuffer/1000/10)/100) + " GB") + ")")
+    $('#ov2per').html($('#ov2per').html().replace(/\n/g,'<br>'));
+    $('#ov3per').text("Used: " + DiskUseAvg + "%" + "\n"  + ((Math.round(DiskTotalUsed/1000/10)/100) + " GB") + "/" + ((Math.round(DiskTotalSize/1000/10)/100) + " GB") + "\n" + " (Free: " + ((Math.round(DiskTotalAvail/1000/10)/100) + " GB") + ")")
+    $('#ov3per').html($('#ov3per').html().replace(/\n/g,'<br>'));
+    $('#ov4per').text("Used: " + (Math.round((SwapUsed/SwapSize)*10000)/100) + "%" + "\n" + ((Math.round(SwapUsed/1000/10)/100) + " GB") + "/" + ((Math.round(SwapSize/1000/10)/100) + " GB") + "\n" + "(Free: " + ((Math.round(SwapFree/1000/10)/100) + " GB") + " Avail: " + ((Math.round(SwapAvail/1000/10)/100) + " GB") + ")")
+    $('#ov4per').html($('#ov4per').html().replace(/\n/g,'<br>'));
     $('#Time').text("Data Time: " + Time);
     $('#Time2').text("Data Time: " + Time);
     $('#Uptime').text("Uptime: " + Uptime.replace("up","   "))
     $('#OnlineUser').text("Online Users: " + Users)
     $('#LoadAvg').text("Load average: " + LoadAvg)
+    $('#CPUtable').append(CPU)
     $('#Disktable').append(Disk)
     $('#MemXSwap').append(Memory)
     $('#MemXSwap').append(Swap)
@@ -112,4 +144,85 @@ $.getJSON("data.json", function (json) {
     $('#LErr').text("Last Error: " + LastErr)
     $('#LWar').text("Last Warning: " + LastWar)
     $('#Updatetable').append(Update)
+
+    var ov1data = [{
+        value: CPUIdle,
+        color: "#E0E0E0",
+        highlight: "#F0F0F0",
+        label: "Not Use"
+    }, {
+        value: (Math.round((100 - CPUIdle)*100)/100),
+        color: "#0D8FDB",
+        highlight: "#1FA1ED",
+        label: "Used"
+    }]
+
+    var ov2data = [{
+        value: (Math.round((MemorySize-MemoryUsed)/1000/10)/100),
+        color: "#E0E0E0",
+        highlight: "#F0F0F0",
+        label: "Not Use"
+    }, {
+        value: (Math.round((MemoryUsed)/1000/10)/100),
+        color: "#0D8FDB",
+        highlight: "#1FA1ED",
+        label: "Used"
+    }]
+
+    var ov3data = [{
+        value: (Math.round((DiskTotalSize-DiskTotalUsed)/1000/10)/100),
+        color: "#E0E0E0",
+        highlight: "#F0F0F0",
+        label: "Not Use"
+    }, {
+        value: (Math.round((DiskTotalUsed)/1000/10)/100),
+        color: "#0D8FDB",
+        highlight: "#1FA1ED",
+        label: "Used"
+    }]
+
+    var ov4data = [{
+        value: (Math.round((SwapFree)/1000/10)/100),
+        color: "#E0E0E0",
+        highlight: "#F0F0F0",
+        label: "Not Use"
+    }, {
+        value: (Math.round((SwapSize-SwapFree)/1000/10)/100),
+        color: "#0D8FDB",
+        highlight: "#1FA1ED",
+        label: "Used"
+    }]
+
+    var netdata = {
+        labels: ["lo", "em1", "veth59b1", "docker"],
+        datasets: [{
+            label: "Download",
+            fillColor: "rgba(220,220,220,0.5)",
+            strokeColor: "rgba(220,220,220,0.9)",
+            highlightFill: "rgba(220,220,220,0.75)",
+            highlightStroke: "rgba(220,220,220,1)",
+            data: [65, 59, 80, 81]
+        }, {
+            label: "Upload",
+            fillColor: "rgba(151,187,205,0.5)",
+            strokeColor: "rgba(151,187,205,0.8)",
+            highlightFill: "rgba(151,187,205,0.75)",
+            highlightStroke: "rgba(151,187,205,1)",
+            data: [28, 48, 40, 19]
+        }]
+    };
+
+    var ov1ctx = $('#ov1').get(0).getContext("2d");
+    var ov1c = new Chart(ov1ctx).Doughnut(ov1data, ovoptionsp);
+    var ov2ctx = $("#ov2").get(0).getContext("2d");
+    var ov2c = new Chart(ov2ctx).Doughnut(ov2data, ovoptionss);
+    var ov3ctx = $('#ov3').get(0).getContext("2d");
+    var ov3c = new Chart(ov3ctx).Doughnut(ov3data, ovoptionss);
+    var ov4ctx = $('#ov4').get(0).getContext("2d");
+    var ov4c = new Chart(ov4ctx).Doughnut(ov4data, ovoptionss);
+    var netctx = $('#net').get(0).getContext("2d");
+    var netc = new Chart(netctx).Bar(netdata, netoptions);
+
+
+
 });

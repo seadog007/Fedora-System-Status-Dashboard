@@ -12,9 +12,10 @@ while true
 	# Begin
 	out="{"
 
-  # Memory
+  # Memory & Swap
     # $('#ov2')
-  out=$out`echo "\"\`free | head -n 2 | tail -n 1 | sed -r "s/[ ]+/,/g" | sed "s/:,/\\\\":\[/"\`]"`
+    # $('#ov4')
+    out=$out`top -bn1 | awk '/KiB Mem/ {printf("\"Mem\":[%s, %s, %s, %s],", $4, $6, $8, $10)} /KiB Swap/ {printf("\"Swap\":[%s, %s, %s, %s]", $3, $5, $7, $9)}'`
 	out=$out","
 
   # Disk
@@ -22,11 +23,6 @@ while true
     # $('#Disktable')
 	out=$out"\"Disk\":"`df | grep '^/dev/s' | tac | awk 'BEGIN {printf("[")}; {printf("[\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"],", $1, $2, $3, $4, $5)}; END {printf("]")}' | sed 's/,]$/]/'`
 	out=$out","
-
-  # Swap
-    # $('#ov4')
-  out=$out`echo "\"\`free | tail -n 1 | sed -r "s/[ ]+/,/g" | sed "s/:,/\\\\":\[/"\`]"`
-  out=$out","
 
 	# TIME
     # $('#Time')
@@ -52,7 +48,7 @@ while true
 	# CPU
     # $('#ov1')
     # $('#CPUtable')
-	out=$out"\"CPUs\":"`sar 1 1 | tail -n 1 | awk 'BEGIN {printf("[")}; {$1=""; $2=""; printf("%s",$0)} END {printf("]")}' | sed "s/\ /\",\"/g" | sed "s/\",\"\",//" | sed "s/\]/\"\]/"`
+    out=$out"\"CPUs\":"`mpstat -P ALL | tail -n$(($(grep 'cpu cores' /proc/cpuinfo | head -n1 | awk '{print $NF}') + 1)) | awk 'BEGIN {printf("[")} {printf("[\"%s\", %s, %s, %s, %s, %s, %s, %s, %s, %s, %s],", $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)} END {printf("]")}' | sed "s/,\]/\]/"`
 	out=$out","
 
 	# Top 10 CPU process
