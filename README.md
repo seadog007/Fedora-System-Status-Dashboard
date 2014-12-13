@@ -3,13 +3,18 @@ Fedora-System-Status-Dashboard (Google Code In task#3)
 
 How to use it?
 ------------------------------
-1. First, Clone it to your compter.
-2. Use root to run these command
+1. Install these packages
+```
+yum install sysstat
+yum install git
+```
+2. First, Clone it to your compter.
+3. Use root to run these command
 ```
 cd /
 git init
 ```
-3. And you need to add your "Important" files.
+4. And you need to add your "Important" files.
   - These are my files list
   ```
   git add /etc/passwd
@@ -27,9 +32,9 @@ git init
   git add /etc/host*
   git add /etc/init.d/
   ```
-4. Commit your files list.
+5. Commit your files list.
 `git commit -am "Your message"`
-5. And you need to run gen.sh with root
+. And you need to run gen.sh with root
 `./gen.sh`
 
 6. You can view your machine status on the WEB!!

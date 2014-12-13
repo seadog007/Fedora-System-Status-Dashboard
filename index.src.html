@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)http://getbootstrap.com/examples/dashboard/# -->
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <meta http-equiv="refresh" content="20000000">
+  <link rel="icon" href="http://a.ba4b.net/favicon.ico">
+
+  <title>Fedora System Status Dashboard</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="Fedora_System_Status_Dashboard_files/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="Fedora_System_Status_Dashboard_files/dashboard.min.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">Fedora System Status Dashboard</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="index.html">Dashboard</a>
+          </li>
+          <li><a href="">Help</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-3 col-md-2 sidebar">
+        <ul id="List" class="nav nav-sidebar">
+          <li class="active"><a href="#Overview" class="scroll">Overview</a>
+          </li>
+          <li><a href="#System_Information" class="scroll">System Information</a>
+          </li>
+          <li><a href="#CPU" class="scroll">CPU</a>
+          </li>
+          <li><a href="#Disk" class="scroll">Disk</a>
+          </li>
+          <li><a href="#MemoryXSwap" class="scroll">Memory & Swap</a>
+          </li>
+          <li><a href="#Network" class="scroll">Network</a>
+          </li>
+          <li><a href="#Process_Information" class="scroll">Process Information</a>
+          </li>
+          <li><a href="#Changed_Files" class="scroll">Changed Files</a>
+          </li>
+          <li><a href="#ErrorXWarning" class="scroll">Error & Warning</a>
+          </li>
+          <li><a href="#Available_Update_List" class="scroll">Update List</a>
+          </li>
+          <li><a href="data.json">Raw Data</a>
+          </li>
+        </ul>
+      </div>
+      <div data-spy="scroll" data-target=".sidebar" class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <p id="Overview"></p>
+        <div class="page-header">
+          <h1>Overview</h1>
+          <p id="Time">Data Time: </p>
+        </div>
+        <div class="row placeholders">
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 placeholder">
+            <canvas id="ov1" width="200" height="200"></canvas>
+            <h4>CPU</h4>
+            <span class="text-muted" id="ov1per">Something else</span>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 placeholder">
+            <canvas id="ov2" width="200" height="200"></canvas>
+            <h4>Memory</h4>
+            <span class="text-muted" id="ov2per">Something else</span>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 placeholder">
+            <canvas id="ov3" width="200" height="200"></canvas>
+            <h4>Disk</h4>
+            <span class="text-muted" id="ov3per">Something else</span>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3 placeholder">
+            <canvas id="ov4" width="200" height="200"></canvas>
+            <h4>Swap</h4>
+            <span class="text-muted" id="ov4per">Something else</span>
+          </div>
+        </div>
+        <div id="System_Information" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <h1 class="sub-header">System Information</h1>
+
+          <p id="Time2">Data Time: </p>
+          <p id="Uptime">Uptime: </p>
+          <p id="OnlineUser">Online Users: </p>
+          <p id="LoadAvg">Load average: </p>
+          <p id="CPU_Name">CPU Name: </p>
+          <p id="CPU_Cores">CPU Cores: </p>
+          <p id="LErr">Last Error: </p>
+          <p id="LWar">Last Warning: </p>
+        </div>
+
+        <div id="CPU" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <h1 class="sub-header">CPU</h1>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <td>CPU</td>
+                  <td>%usr</td>
+                  <td>%nice</td>
+                  <td>%system</td>
+                  <td>%iowait</td>
+                  <td>%irq</td>
+                  <td>%soft</td>
+                  <td>%steal</td>
+                  <td>%gues</td>
+                  <td>%gnice</td>
+                  <td>%idle</td>
+                </tr>
+              </thead>
+              <tbody id="CPUtable">
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="Disk" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <h1 class="sub-header">Disk</h1>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <td>Device</td>
+                  <td>Size</td>
+                  <td>Used</td>
+                  <td>Avail</td>
+                  <td>Use%</td>
+                </tr>
+              </thead>
+              <tbody id="Disktable">
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="MemoryXSwap" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <h1 class="sub-header">Memory & Swap</h1>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <td>Device</td>
+                  <td>Size</td>
+                  <td>Free</td>
+                  <td>Used</td>
+                  <td>Buffer/Cache or Avail</td>
+                </tr>
+              </thead>
+              <tbody id="MemXSwap">
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="Network" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <h1 class="sub-header">Network</h1>
+          <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 col-xs-offset-0 col-sm-offset-6 col-md-offset-9 col-lg-offset-9">
+            <select id="Net_Select" class="form-control">
+              <option selected>Packets</option>
+              <option>Bytes</option>
+            </select>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <canvas id="net"></canvas>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Interface</th>
+                    <th>Rx Packets/s</th>
+                    <th>Tx Packets/s</th>
+                    <th>Rx kB/s</th>
+                    <th>Tx kB/s</th>
+                  </tr>
+                </thead>
+                <tbody id="Network_Table">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="Process_Information" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <h1 class="sub-header">Process Information</h1>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <h4>CPU Top 10 Process</h4>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>#PID</th>
+                    <th>CPU%</th>
+                    <th>User</th>
+                    <th>Command</th>
+                  </tr>
+                </thead>
+                <tbody id="Process_10T_CPU_Table">
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <h4>Memory Top 10 Process</h4>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>#PID</th>
+                    <th>Memory%</th>
+                    <th>User</th>
+                    <th>Command</th>
+                  </tr>
+                </thead>
+                <tbody id="Process_10T_Mem_Table">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="Changed_Files" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <h1 class="sub-header">Changed Files</h1>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <td>Method</td>
+                  <td>Localtion</td>
+                </tr>
+              </thead>
+              <tbody id="Files_Table">
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      <div id="ErrorXWarning" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <h1 class="sub-header">Error & Warning</h1>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <h4>Last 10 Error</h4>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Serial</th>
+                    <th>Error</th>
+                  </tr>
+                </thead>
+                <tbody id="Last_10_Error_Table">
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <h4>Last 10 Warning</h4>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Serial</th>
+                    <th>Warning</th>
+                  </tr>
+                </thead>
+                <tbody id="Last_10_Warning_Table">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="Available_Update_List" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <h1 class="sub-header">Available Update List</h1>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <td>Package Name</td>
+                  <td>Version</td>
+                  <td>Type</td>
+                </tr>
+              </thead>
+              <tbody id="Updatetable">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap core JavaScript
+    ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="Fedora_System_Status_Dashboard_files/jquery.min.js"></script>
+  <script src="Fedora_System_Status_Dashboard_files/bootstrap.min.js"></script>
+  <script src="Fedora_System_Status_Dashboard_files/docs.min.js"></script>
+  <script src="Fedora_System_Status_Dashboard_files/Chart.min.js"></script>
+  <script src="Fedora_System_Status_Dashboard_files/options.min.js"></script>
+  <script src="Fedora_System_Status_Dashboard_files/setup.min.js"></script>
+  <script src="Fedora_System_Status_Dashboard_files/scroll.min.js"></script>
+</body>
+
+</html>
