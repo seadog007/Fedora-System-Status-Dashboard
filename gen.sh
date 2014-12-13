@@ -64,14 +64,22 @@ while true
   # Last Error
     # $('#LErr')
     # $('#Last_10_Error_Table')
-    out=$out"\"LastError\":"`dmesg | grep -E 'Error|error' | tail -n 10 | tac | sed 's/\\\\/\\\\\\\\/g' | awk 'NR > 1 {printf(", ")} BEGIN {printf("[")}; {printf("\"%s\"",$0)} END {printf("]")};'`
+  out=$out"\"LastError\":"`dmesg | grep -E 'Error|error' | tail -n 10 | tac | sed 's/\\\\/\\\\\\\\/g' | awk 'NR > 1 {printf(", ")} BEGIN {printf("[")}; {printf("\"%s\"",$0)} END {printf("]")};'`
   out=$out","
 
   # Last Warning
     # $('#LWar')
     # $('#Last_10_War_Table')
-    out=$out"\"LastWar\":"`dmesg | grep -E 'Warning|warning' | tail -n 10 | tac | sed 's/\\\\/\\\\\\\\/g' | awk 'NR > 1 {printf(", ")} BEGIN {printf("[")}; {printf("\"%s\"",$0)} END {printf("]")};'`
+  out=$out"\"LastWar\":"`dmesg | grep -E 'Warning|warning' | tail -n 10 | tac | sed 's/\\\\/\\\\\\\\/g' | awk 'NR > 1 {printf(", ")} BEGIN {printf("[")}; {printf("\"%s\"",$0)} END {printf("]")};'`
   out=$out","
+
+  # Changed Files
+    # $('Files_Table')
+  cd /
+  out=$out"\"Files\":"`git status | grep -e "modified\|deleted" | awk 'BEGIN {printf("[")} NR > 1 {printf(", ")} {printf("[\"%s\", \"/%s\"]", $1, $2)} END {printf("]")}' | sed "s/:\",/\",/g"`
+  out=$out","
+  cd - > /dev/null
+
 
 	# Yum update
     # $('#Updatetable')

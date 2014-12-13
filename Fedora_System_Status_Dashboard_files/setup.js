@@ -120,6 +120,19 @@ $.getJSON("data.json", function (json) {
         L10War = "<tr><td colspan=2>Congratulation! There is not any Warning.</td></tr>"
     }
 
+
+    var Files = ""
+    for (var i = 0; i <= json.Files.length - 1; i++) {
+        Files = Files + "<tr>"
+        for (var j = 0; j <= 2 - 1; j++) {
+            Files = Files + "<td>" + json.Files[i][j] + "</td>"
+        }
+        Files = Files + "</tr>"
+    }
+    if (json.Files.length == 0){
+        Files = "<tr><td colspan=3>Great! All files are safe.</td></tr>"
+    }
+
     var Update = ""
     for (var i = 0; i <= json.Update.length - 1; i++) {
         Update = Update + "<tr>"
@@ -151,6 +164,7 @@ $.getJSON("data.json", function (json) {
     $('#Network_Table').append(Net)
     $('#Process_10T_CPU_Table').append(CT10P)
     $('#Process_10T_Mem_Table').append(MT10P)
+    $('#Files_Table').append(Files)
     $('#Last_10_Error_Table').append(L10Err)
     $('#Last_10_Warning_Table').append(L10War)
     $('#LErr').text("Last Error: " + LastErr)
