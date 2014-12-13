@@ -1,6 +1,7 @@
 var debugvar
+var changevar
 $.getJSON("data.json", function (json) {
-    debugvar  = json
+    changevar  = json
     var Time = json.Time
     var Uptime = json.Uptime[0]
     var Users = ""
@@ -70,6 +71,16 @@ $.getJSON("data.json", function (json) {
     }
     Swap = Swap + "</tr>"
 
+    var Net = ""
+    for (var i = 0; i <= json.Network.length - 1; i++) {
+        Net = Net + "<tr>"
+        for (var j = 0; j <= 5 - 1; j++){
+            Net = Net + "<td>" + json.Network[i][j] + "</td>"
+        }
+        Net = Net + "</tr>"
+    }
+
+
     var CT10P = ""
     for (var i = 0; i <= json.Process_10T_CPU.length - 1; i++) {
         CT10P = CT10P + "<tr>"
@@ -137,6 +148,7 @@ $.getJSON("data.json", function (json) {
     $('#Disktable').append(Disk)
     $('#MemXSwap').append(Memory)
     $('#MemXSwap').append(Swap)
+    $('#Network_Table').append(Net)
     $('#Process_10T_CPU_Table').append(CT10P)
     $('#Process_10T_Mem_Table').append(MT10P)
     $('#Last_10_Error_Table').append(L10Err)
@@ -193,24 +205,70 @@ $.getJSON("data.json", function (json) {
         label: "Used"
     }]
 
-    var netdata = {
-        labels: ["lo", "em1", "veth59b1", "docker"],
+
+     netdata = {
+        labels: [],
         datasets: [{
             label: "Download",
             fillColor: "rgba(220,220,220,0.5)",
             strokeColor: "rgba(220,220,220,0.9)",
             highlightFill: "rgba(220,220,220,0.75)",
             highlightStroke: "rgba(220,220,220,1)",
-            data: [65, 59, 80, 81]
+            data: []
         }, {
             label: "Upload",
             fillColor: "rgba(151,187,205,0.5)",
             strokeColor: "rgba(151,187,205,0.8)",
             highlightFill: "rgba(151,187,205,0.75)",
             highlightStroke: "rgba(151,187,205,1)",
-            data: [28, 48, 40, 19]
+            data: []
         }]
     };
+
+    json.Network.forEach(function(item){
+        netdata.labels.push(item[0]);
+        netdata.datasets[0].data.push(item[1]);
+        netdata.datasets[1].data.push(item[2]);
+    });
+
+    $('#Net_Select').change(function() {
+
+        netdata = {
+            labels: [],
+            datasets: [{
+                label: "Download",
+                fillColor: "rgba(220,220,220,0.5)",
+                strokeColor: "rgba(220,220,220,0.9)",
+                highlightFill: "rgba(220,220,220,0.75)",
+                highlightStroke: "rgba(220,220,220,1)",
+                data: []
+            }, {
+                label: "Upload",
+                fillColor: "rgba(151,187,205,0.5)",
+                strokeColor: "rgba(151,187,205,0.8)",
+                highlightFill: "rgba(151,187,205,0.75)",
+                highlightStroke: "rgba(151,187,205,1)",
+                data: []
+            }]
+        };
+
+        if ($('#Net_Select').val()=="Packets"){
+            changevar.Network.forEach(function(item){
+                netdata.labels.push(item[0]);
+                netdata.datasets[0].data.push(item[1]);
+                netdata.datasets[1].data.push(item[2]);
+            });
+        }else{
+            changevar.Network.forEach(function(item){
+                netdata.labels.push(item[0]);
+                netdata.datasets[0].data.push(item[3]);
+                netdata.datasets[1].data.push(item[4]);
+            });
+        }
+
+        var netctx = $('#net').get(0).getContext("2d");
+        var netc = new Chart(netctx).Bar(netdata, netoptions);
+    });
 
     var ov1ctx = $('#ov1').get(0).getContext("2d");
     var ov1c = new Chart(ov1ctx).Doughnut(ov1data, ovoptionsp);
@@ -223,6 +281,5 @@ $.getJSON("data.json", function (json) {
     var netctx = $('#net').get(0).getContext("2d");
     var netc = new Chart(netctx).Bar(netdata, netoptions);
 
-
-
 });
+$('body').scrollspy({offset: 80, target: '.sidebar' })
