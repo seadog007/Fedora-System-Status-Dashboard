@@ -37,8 +37,18 @@ while true
 
 	# Uptime
     # $('#Uptime')
-	out=$out"\"Uptime\":"`echo "[\"\`uptime | sed "s/load\ average://" | sed "s/users//" | sed "s/\ //g" | sed "s/,/\\\",\\\"/g"\`\"]"`
+	out=$out"\"Uptime\":"`echo "[\"\`uptime | sed "s/load\ average://" | sed "s/users//" | sed "s/\ //g" | sed "s/day,/day/" | sed "s/,/\\\",\\\"/g"\`\"]"`
 	out=$out","
+
+  # CPU_Cores
+    # $('#CPU_Cores')
+  out=$out$(echo "\"CPU_Cores\":$(cat /proc/cpuinfo | grep "cores" | head -n1 | awk '{printf("%s", $4)}')")
+  out=$out","
+
+  # CPU_Name
+    # $('#CPU_Name')
+  out=$out$(echo "\"CPU_Name\":$(cat /proc/cpuinfo | grep "model name" | head -n1 | awk '{$1=$2=$3=""; printf("\"%s\"", $0)}')")
+  out=$out","
 
 	# Network
     # $('#net')
@@ -48,7 +58,7 @@ while true
 	# CPU
     # $('#ov1')
     # $('#CPUtable')
-    out=$out"\"CPUs\":"`mpstat -P ALL | tail -n$(($(grep 'cpu cores' /proc/cpuinfo | head -n1 | awk '{print $NF}') + 1)) | awk 'BEGIN {printf("[")} {printf("[\"%s\", %s, %s, %s, %s, %s, %s, %s, %s, %s, %s],", $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)} END {printf("]")}' | sed "s/,\]/\]/"`
+    out=$out"\"CPUs\":"`mpstat -P ALL | tail -n$(($(grep 'cpu cores' /proc/cpuinfo | head -n1 | awk '{print $NF}') + 1)) | awk 'BEGIN {printf("[")} {printf("[\"%s\", %s, %s, %s, %s, %s, %s, %s, %s, %s, %s],", $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)} END {printf("]")}' | sed "s/,\]/\]/"`
 	out=$out","
 
 	# Top 10 CPU process

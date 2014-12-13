@@ -12,6 +12,8 @@ $.getJSON("data.json", function (json) {
         }
     }
     var LoadAvg = json.Uptime[2] + ", " + json.Uptime[3] + ", " + json.Uptime[4]
+    var CPU_Name = json.CPU_Name
+    var CPU_Cores = json.CPU_Cores
     var LastErr = json.LastError[json.LastError.length - 1]
     var LastWar = json.LastWar[json.LastWar.length - 1]
 
@@ -154,9 +156,11 @@ $.getJSON("data.json", function (json) {
     $('#ov4per').html($('#ov4per').html().replace(/\n/g,'<br>'));
     $('#Time').text("Data Time: " + Time);
     $('#Time2').text("Data Time: " + Time);
-    $('#Uptime').text("Uptime: " + Uptime.replace("up","   "))
+    $('#Uptime').text("Uptime: " + Uptime.replace("up","   ").split(" ")[3].replace("day"," Day  "))
     $('#OnlineUser').text("Online Users: " + Users)
     $('#LoadAvg').text("Load average: " + LoadAvg)
+    $('#CPU_Name').text("CPU Name: " + CPU_Name)
+    $('#CPU_Cores').text("CPU Cores: " + CPU_Cores)
     $('#CPUtable').append(CPU)
     $('#Disktable').append(Disk)
     $('#MemXSwap').append(Memory)
