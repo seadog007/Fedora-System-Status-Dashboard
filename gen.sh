@@ -63,12 +63,12 @@ while true
 
 	# Top 10 CPU process
     # $('#Process_10T_Mem_Table')
-	out=$out"\"Process_10T_CPU\":"`ps -eo pid,%cpu,fuser,comm --sort -%cpu | head -n 11 | tail -n 10 | awk 'BEGIN {printf("[")}; {printf("[\"%s\", \"%s\", \"%s\",\"%s\"],",$1,$2,$3,$4)} END {printf("]")}' | sed "s/],]$/]]/"`
+	out=$out"\"Process_10T_CPU\":"`ps -eo pid,%cpu,fuser,comm --sort -%cpu | sed -n 2,11p | awk 'BEGIN {printf("[")}; {printf("[\"%s\", \"%s\", \"%s\",\"%s\"],",$1,$2,$3,$4)} END {printf("]")}' | sed "s/],]$/]]/"`
 	out=$out","
 
 	# Top 10 Memory process
     # $('#Process_10T_CPU_Table')
-	out=$out"\"Process_10T_Mem\":"`ps -eo pid,%mem,fuser,comm --sort -%mem | head -n 11 | tail -n 10 | awk 'BEGIN {printf("[")}; {printf("[\"%s\", \"%s\", \"%s\",\"%s\"],",$1,$2,$3,$4)} END {printf("]")}' | sed "s/],]$/]]/"`
+	out=$out"\"Process_10T_Mem\":"`ps -eo pid,%mem,fuser,comm --sort -%mem | sed -n 2,11p | awk 'BEGIN {printf("[")}; {printf("[\"%s\", \"%s\", \"%s\",\"%s\"],",$1,$2,$3,$4)} END {printf("]")}' | sed "s/],]$/]]/"`
 	out=$out","
 
   # Last Error
