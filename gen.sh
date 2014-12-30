@@ -15,7 +15,7 @@ while true
   # Memory & Swap
     # $('#ov2')
     # $('#ov4')
-    out=$out`top -bn1 | awk '/KiB Mem/ {printf("\"Mem\":[%s, %s, %s, %s],", $4, $6, $8, $10)} /KiB Swap/ {printf("\"Swap\":[%s, %s, %s, %s]", $3, $5, $7, $9)}'`
+  out=$out`top -bn1 | awk '/KiB Mem/ {printf("\"Mem\":[%s, %s, %s, %s],", $4, $6, $8, $10)} /KiB Swap/ {printf("\"Swap\":[%s, %s, %s, %s]", $3, $5, $7, $9)}'`
 	out=$out","
 
   # Disk
