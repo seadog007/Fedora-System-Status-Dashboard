@@ -22,7 +22,7 @@ $.getJSON("data.json", function (json) {
     for (var i = 0; i <= json.CPUs.length - 1; i++) {
         CPU = CPU + "<tr>"
         for (var j = 0; j <= 11 - 1; j++){
-                CPU = CPU + "<td>" + json.CPUs[i][j] + "</td>"
+            CPU = CPU + "<td>" + json.CPUs[i][j] + "</td>"
         }
         CPU = CPU + "</tr>"
     }
@@ -224,7 +224,7 @@ $.getJSON("data.json", function (json) {
     }]
 
 
-     netdata = {
+    netdata = {
         labels: [],
         datasets: [{
             label: "Download",
