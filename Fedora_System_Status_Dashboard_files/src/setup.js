@@ -137,11 +137,13 @@ $.getJSON("data.json", function (json) {
 
     var Update = ""
     for (var i = 0; i <= json.Update.length - 1; i++) {
+        if (json.Update[i][0] != "" && json.Update[i][1] != "" && json.Update[i][2]){
         Update = Update + "<tr>"
         for (var j = 0; j <= 3 - 1; j++) {
             Update = Update + "<td>" + json.Update[i][j] + "</td>"
         }
         Update = Update + "</tr>"
+        }
     }
     if (json.Update.length == 0){
         Update = "<tr><td colspan=3>Great! You don't have update.</td></tr>"
