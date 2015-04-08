@@ -136,22 +136,24 @@ $.getJSON("data.json", function (json) {
   }
 
   var Update_Head = ""
-if (json.Install_System_Type==1){
-Update_Head = "<td>Package Name</td><td>Version</td><td>Type</td>"
-}else if(json.Install_System_Type==2){
-  Update_Head = "<td>Package Name</td><td>Now Version</td><td>New Version</td><td>Type</td><td>Platform</td>"
-}else if(json.Install_System_Type==3){
-Update_Head = "<td>Package Name</td><td>Now Version</td><td>New Version</td>"
-}
-}
+    if (json.Install_System_Type==1){
+      Update_Head = "<td>Package Name</td><td>Version</td><td>Type</td>"
+    }else if(json.Install_System_Type==2){
+      Update_Head = "<td>Package Name</td><td>Now Version</td><td>New Version</td><td>Type</td><td>Platform</td>"
+    }else if(json.Install_System_Type==3){
+      Update_Head = "<td>Package Name</td><td>Now Version</td><td>New Version</td>"
+    }
 
-    var Update = ""
+
+  var Update = ""
     for (var i = 0; i <= json.Update.length - 1; i++) {
+      if ((json.Install_System_Type==1 && json.Update[i][2] != "") || json.Install_System_Type!=1){
         Update = Update + "<tr>"
           for (var j = 0; j <= json.Update[0].length - 1; j++) {
             Update = Update + "<td>" + json.Update[i][j] + "</td>"
           }
         Update = Update + "</tr>"
+      }
     }
   if (json.Update.length == 0 && json.Install_System_Type != 0){
     Update = "<tr><td colspan=3>Great! You don't have update.</td></tr>"
